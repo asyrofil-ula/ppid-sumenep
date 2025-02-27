@@ -15,6 +15,7 @@ use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use App\Models\KlasifikasiInformasi;
 use App\Models\JenisInformasi;
 use App\Models\DetailJenisInformasi;
+use Faker\Provider\ar_EG\Text;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\SelectColumn;
 

@@ -13,11 +13,8 @@ return new class extends Migration
     {
         Schema::create('informasi_publik', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('klasifikasi_informasi_id')->constrained('klasifikasi_informasi')->onDelete('cascade')->nullable();
-            $table->foreignId('jenis_informasi_id')->constrained('jenis_informasi')->onDelete('cascade')->nullable();
-            $table->foreignId('detail_jenis_informasi_id')->constrained('detail_jenis_informasi')->onDelete('cascade')->nullable();
             $table->string('nama_informasi');
-            $table->string('post_by');
+            $table->string('post_by')->nullable();
             $table->string('icon')->nullable();
             $table->boolean('is_active')->default(false);
             $table->string('nama_dokumen')->nullable();

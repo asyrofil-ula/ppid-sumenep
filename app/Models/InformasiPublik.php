@@ -9,9 +9,6 @@ class InformasiPublik extends Model
 
     protected $table = 'informasi_publik';
     protected $fillable = [
-        'klasifikasi_informasi_id',
-        'jenis_informasi_id',
-        'detail_jenis_informasi_id',
         'nama_informasi',
         'post_by',
         'icon',
