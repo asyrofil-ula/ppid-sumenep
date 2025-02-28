@@ -20,7 +20,7 @@
                     <div class="bg-white rounded-lg p-4 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 hover:border-red-300">
                         <div class="text-center mb-3">
                             <div class="w-20 h-20 mx-auto bg-red-100 rounded-full flex items-center justify-center">
-                                <span class="text-red-600 text-2xl font-bold">IR</span>
+                                <span class="text-red-600 text-2xl font-bold">I</span>
                             </div>
                         </div>
                         <h4 class="text-xl font-bold text-center text-gray-800">Irwan Sujatmiko </h4>
@@ -44,7 +44,7 @@
                     <div class="bg-white rounded-lg p-4 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 hover:border-red-300">
                         <div class="text-center mb-3">
                             <div class="w-20 h-20 mx-auto bg-red-100 rounded-full flex items-center justify-center">
-                                <span class="text-red-600 text-2xl font-bold">AR</span>
+                                <span class="text-red-600 text-2xl font-bold">A</span>
                             </div>
                         </div>
                         <h4 class="text-xl font-bold text-center text-gray-800">Achmad Rayhan Abror</h4>
@@ -69,7 +69,7 @@
                     <div class="bg-white rounded-lg p-4 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 hover:border-red-300">
                         <div class="text-center mb-3">
                             <div class="w-20 h-20 mx-auto bg-red-100 rounded-full flex items-center justify-center">
-                                <span class="text-red-600 text-2xl font-bold">AR</span>
+                                <span class="text-red-600 text-2xl font-bold">A</span>
                             </div>
                         </div>
                         <h4 class="text-xl font-bold text-center text-gray-800">Ahmad Ramadani Bahri</h4>
@@ -82,7 +82,7 @@
                     <div class="bg-white rounded-lg p-4 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 hover:border-red-300">
                         <div class="text-center mb-3">
                             <div class="w-20 h-20 mx-auto bg-red-100 rounded-full flex items-center justify-center">
-                                <span class="text-red-600 text-2xl font-bold">AR</span>
+                                <span class="text-red-600 text-2xl font-bold">A</span>
                             </div>
                         </div>
                         <h4 class="text-xl font-bold text-center text-gray-800">Adi Rahman</h4>
@@ -95,7 +95,7 @@
                     <div class="bg-white rounded-lg p-4 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 hover:border-red-300">
                         <div class="text-center mb-3">
                             <div class="w-20 h-20 mx-auto bg-red-100 rounded-full flex items-center justify-center">
-                                <span class="text-red-600 text-2xl font-bold">SR</span>
+                                <span class="text-red-600 text-2xl font-bold">S</span>
                             </div>
                         </div>
                         <h4 class="text-xl font-bold text-center text-gray-800">Syehrana Reza Putra</h4>
@@ -120,7 +120,7 @@
                     <div class="bg-white rounded-lg p-4 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 hover:border-red-300">
                         <div class="text-center mb-3">
                             <div class="w-20 h-20 mx-auto bg-red-100 rounded-full flex items-center justify-center">
-                                <span class="text-red-600 text-2xl font-bold">AU</span>
+                                <span class="text-red-600 text-2xl font-bold">A</span>
                             </div>
                         </div>
                         <h4 class="text-xl font-bold text-center text-gray-800">Asyrofil 'Ula</h4>
@@ -133,7 +133,7 @@
                     <div class="bg-white rounded-lg p-4 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 hover:border-red-300">
                         <div class="text-center mb-3">
                             <div class="w-20 h-20 mx-auto bg-red-100 rounded-full flex items-center justify-center">
-                                <span class="text-red-600 text-2xl font-bold">IZ</span>
+                                <span class="text-red-600 text-2xl font-bold">I</span>
                             </div>
                         </div>
                         <h4 class="text-xl font-bold text-center text-gray-800">Imam Zarkasyi</h4>

@@ -38,7 +38,15 @@
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
                 </div>
-
+                {{-- 2. Deskripsi --}}
+                <div class="flex items-center space-x-4">
+                    <label class="font-semibold w-1/3">Deskripsi</label>
+                    <input type="text" class="flex-1 border rounded px-3 py-2 w-full truncate" placeholder="Deskripsi"
+                        name="description" required>
+                    @error('description')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
+                </div>
 
 
                 <div class="flex items-center space-x-4">
@@ -100,15 +108,9 @@
                     <th scope="col" class="px-6 py-3">
                         Nama Informasi
                     </th>
-                    {{-- <th scope="col" class="px-6 py-3">
-                        Klasifikasi Informasi
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Jenis Informasi
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Detail Jenis Informasi
-                    </th> --}}
+                  <th scope="col" class="px-6 py-3">
+                    Deskripsi
+                  </th>
                     <th scope="col" class="px-6 py-3">
                         Status
                     </th>
@@ -143,21 +145,7 @@
                                 {{ $no++ }}
                             </th>
                             <td class="px-6 py-4 truncate">{{ $item->nama_infografis }}</td>
-                            {{-- @foreach ($klasifikasi_informasi as $klasifikasi)
-                                @if ($klasifikasi->id == $item->klasifikasi_informasi_id)
-                                    <td class="px-6 py-4 truncate">{{ $klasifikasi->klasifikasi_informasi }}</td>
-                                @endif
-                            @endforeach
-                            @foreach ($detail_jenis_informasi as $detail)
-                                @if ($detail->id == $item->detail_jenis_informasi_id)
-                                    <td class="px-6 py-4 truncate">{{ $detail->description }}</td>
-                                @endif
-                            @endforeach
-                            @foreach ($detail_jenis_informasi as $detail)
-                                @if ($detail->id == $item->detail_jenis_informasi_id)
-                                    <td class="px-6 py-4 truncate">{{ $detail->description }}</td>
-                                @endif
-                            @endforeach --}}
+                            <td class="px-6 py-4 truncate">{{ $item->description }}</td>
                             <td class="px-6 py-4 truncate"> {{ $item->is_active ? 'Aktif' : 'Tidak Aktif' }}</td>
                             <td class="px-6 py-4 truncate">{{ $item->nama_dokumen }}</td>
                             <td class="px-6 py-4">

@@ -170,16 +170,13 @@ class StoreController extends Controller
     {
         $validatedData = $request->validate([
             'nama_infografis' => 'required|string|max:255',
-            // 'klasifikasi_informasi_id' => 'required|exists:klasifikasi_informasi,id',
-            // 'jenis_informasi_id' => 'required|exists:jenis_informasi,id',
-            // 'detail_jenis_informasi_id' => 'required|exists:detail_jenis_informasi,id',
+            'description' => 'required|string|max:255',
             'nama_dokumen' => 'required|string|max:255',
             'file_pdf' => 'required|mimes:jpeg,jpg,png,gif|max:5048',
             'is_active' => 'sometimes|accepted'
         ], [
-            // 'klasifikasi_informasi_id.exists' => 'Klasifikasi informasi tidak valid',
-            // 'jenis_informasi_id.exists' => 'Jenis informasi tidak valid',
-            // 'detail_jenis_informasi_id.exists' => 'Detail jenis informasi tidak valid',
+            'nama_infografis.required' => 'Nama infografis tidak boleh kosong',
+            'description.required' => 'Deskripsi tidak boleh kosong',
             'file_pdf.required' => 'Upload Dokumen tidak boleh kosong',
             'nama_dokumen.required' => 'Nama dokumen tidak boleh kosong',
             'file_pdf.mimes' => 'Dokumen harus berformat Gambar',
@@ -200,10 +197,8 @@ class StoreController extends Controller
     
             // Create informasi publik
             $informasi = Infografis::create([
-                // 'klasifikasi_informasi_id' => $validatedData['klasifikasi_informasi_id'],
-                // 'jenis_informasi_id' => $validatedData['jenis_informasi_id'],
-                // 'detail_jenis_informasi_id' => $validatedData['detail_jenis_informasi_id'],
                 'nama_infografis' => $validatedData['nama_infografis'],
+                'description' => $validatedData['description'],
                 'nama_dokumen' => $validatedData['nama_dokumen'],
                 'path_dokumen' => $filePath ? str_replace('public/', '', $filePath) : null,
                 'is_active' => $request->has('is_active'),
