@@ -105,10 +105,10 @@
                 @php
                     $no = 1;
                 @endphp
-                @foreach ($aplikasi_layanan_publik as $app)
+                @foreach ($aplikasi_layanan_publik as $key => $app)
                     <tr class="bg-white border-b  border-gray-200">
                         <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-                            {{ $no++ }}
+                            {{ $aplikasi_layanan_publik->firstItem() + $key }}
                         </th>
                         <td class="px-6 py-4">
                             {{ $app->nama_aplikasi }}
@@ -156,5 +156,8 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="p-4">
+            {{ $aplikasi_layanan_publik->links('pagination::tailwind') }}
+        </div>
     </div>
 @endsection

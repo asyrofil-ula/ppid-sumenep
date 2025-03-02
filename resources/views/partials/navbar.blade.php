@@ -192,23 +192,37 @@
                                 </span>
                             </a>
                         @endif
+                        @if(Auth::user()->role == 'pembantu')
                         <div id="dropdown"
                             class="absolute left-0 hidden group-hover:block bg-white divide-y divide-gray-100 rounded-lg shadow w-44 z-10">
                             <ul class="py-2 text-sm text-gray-700">
                                 <li>
-                                    {{-- <a href="{{ route('informasi-publik') }}"
-                                        class="block px-4 py-2 hover:bg-gray-100">Informasi Publik</a> --}}
-                                    {{-- <a href="{{ route('detail-informasi-publik') }}"
-                                        class="block px-4 py-2 hover:bg-gray-100">Detail Informasi Publik</a> --}}
                                     <a href="{{ route('file-publik') }}"
                                         class="block px-4 py-2 hover:bg-gray-100">File Informasi Publik</a>
                                     <a href="{{ route('infografis') }}"
                                         class="block px-4 py-2 hover:bg-gray-100">Infografis</a>
+                                        <a href="{{ route('galery') }}"
+                                        class="block px-4 py-2 hover:bg-gray-100">Galeri</a>
                                     <a href="{{ route('aplikasi-layanan-publik') }}"
                                         class="block px-4 py-2 hover:bg-gray-100">Aplikasi Layanan Publik</a>
                                 </li>
                             </ul>
                         </div>
+                        @else
+                        <div id="dropdown"
+                            class="absolute left-0 hidden group-hover:block bg-white divide-y divide-gray-100 rounded-lg shadow w-44 z-10">
+                            <ul class="py-2 text-sm text-gray-700">
+                                <li>
+                                    <a href="{{ route('file-publik') }}"
+                                        class="block px-4 py-2 hover:bg-gray-100">File Informasi Publik</a>
+                                    <a href="{{ route('infografis') }}"
+                                        class="block px-4 py-2 hover:bg-gray-100">Infografis</a>
+                                        <a href="{{ route('galery') }}"
+                                        class="block px-4 py-2 hover:bg-gray-100">Galeri</a>
+                                </li>
+                            </ul>
+                        </div>
+                        @endif
                     </li>
                 @endif
                 {{-- <li>

@@ -50,13 +50,16 @@ Route::get('/ppid-desa', function () {
 Route::middleware(CheckAuth::class, 'auth')->group(function () {
     // servant
     Route::get('/infografis', [UserController::class, 'infografis'])->name('infografis');
+    Route::get('/galery', [UserController::class, 'galery'])->name('galery');
     Route::get('/informasi-publik', [UserController::class, 'informasi_publik'])->name('informasi-publik');
     Route::get('/aplikasi-layanan-publik', [UserController::class, 'aplikasi_layanan_publik'])->name('aplikasi-layanan-publik');
     Route::get('/detail-informasi-publik', [UserController::class, 'detail_informasi_publik'])->name('detail-informasi-publik');
     Route::get('/file-publik', [UserController::class, 'file_informasi_publik'])->name('file-publik');
 
+
     // store
     Route::post('/informasi-publik/store', [StoreController::class, 'store_informasi_public'])->name('informasi-public.store');
+    Route::post('/galeri/store', [StoreController::class, 'store_galery'])->name('galeri.store');
     Route::post('/informasi-publik-detail/store', [StoreController::class, 'store_informasi_public_detail'])->name('informasi-public-detail.store');
     Route::post('/infografis/store', [StoreController::class, 'store_infografis'])->name('infografis.store');
     Route::post('/aplikasi-layanan-publik/store', [StoreController::class, 'store_aplikasi_layanan_publik'])->name('aplikasi-layanan-publik.store');

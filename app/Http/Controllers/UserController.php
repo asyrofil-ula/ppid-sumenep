@@ -101,6 +101,11 @@ class UserController extends Controller
         return view('servant.informasi_public', compact('klasifikasi_informasi', 'jenis_informasi', 'detail_jenis_informasi', 'informasi_publik'));
     }
 
+    public function galery(){
+        $galeris = Galeri::orderByDesc('updated_at')->paginate(5);
+        return view('servant.galeri', compact('galeris'));
+    }
+
     public function detail_informasi_publik()
     {
         $informasi_publik = InformasiPublik::all();
@@ -112,7 +117,7 @@ class UserController extends Controller
     {
         $informasi_publik_detail = InformasiPublikDetail::all();
         $informasi_publik = InformasiPublik::with('informasiPublikDetails')->get();
-        $file_informasi_publik = FileInformasiPublik::all();
+        $file_informasi_publik = FileInformasiPublik::paginate(5);
         return view('servant.file-informasi-publik', compact('file_informasi_publik', 'informasi_publik_detail', 'informasi_publik'));
     }
     
@@ -121,13 +126,13 @@ class UserController extends Controller
         $klasifikasi_informasi = KlasifikasiInformasi::all();
         $jenis_informasi = JenisInformasi::all();
         $detail_jenis_informasi = DetailJenisInformasi::all();
-        $infografis = Infografis::all();
+        $infografis = Infografis::orderByDesc('updated_at')->paginate(8);
         return view('servant.infografis', compact('klasifikasi_informasi', 'jenis_informasi', 'detail_jenis_informasi', 'infografis'));
     }
 
     public function aplikasi_layanan_publik()
     {   
-        $aplikasi_layanan_publik = AplikasiLayanan::all();
+        $aplikasi_layanan_publik = AplikasiLayanan::paginate(5);
         return view('servant.aplikasi-layanan-publik', compact('aplikasi_layanan_publik'));
     }
 

@@ -137,10 +137,10 @@
                 @php
                     $no = 1;
                 @endphp
-                @foreach ($file_informasi_publik as $app)
+                @foreach ($file_informasi_publik as $index => $app)
                     <tr class="bg-white border-b  border-gray-200">
                         <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-                            {{ $no++ }}
+                            {{ $file_informasi_publik->firstItem() + $index }}
                         </th>
                         @foreach ($informasi_publik_detail as $item)
                             @if ($item->id == $app->informasi_publik_detail_id)
@@ -197,5 +197,8 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="p-4">
+            {{ $file_informasi_publik->links('pagination::tailwind') }}
+        </div>
     </div>
 @endsection

@@ -27,14 +27,14 @@
             </h1>
             @endif
 
-            <form class="space-y-4" method="POST" action="{{ route('infografis.store') }}" enctype="multipart/form-data">
+            <form class="space-y-4" method="POST" action="{{ route('galeri.store') }}" enctype="multipart/form-data">
                 @csrf
-                <!-- 1. Nama Informasi -->
+                <!-- 1. Judul -->
                 <div class="flex items-center space-x-4">
-                    <label class="font-semibold w-1/3">Nama Infografis</label>
+                    <label class="font-semibold w-1/3">Judul</label>
                     <input type="text" class="flex-1 border rounded px-3 py-2 w-full truncate"
-                        placeholder="Nama Infografis" name="nama_infografis" required>
-                    @error('nama_infografis')
+                        placeholder="Judul" name="title" required>
+                    @error('title')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
                 </div>
@@ -47,14 +47,6 @@
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
                 </div>
-
-
-                <div class="flex items-center space-x-4">
-                    <label class="font-semibold w-1/3">Nama Dokumen</label>
-                    <input type="text" class="flex-1 border rounded px-3 py-2 w-full truncate" placeholder="Nama Dokumen"
-                        name="nama_dokumen">
-                </div>
-
                 <div class="flex items-center space-x-4">
                     <label class="font-semibold w-1/3">Upload Gambar</label>
                     <div class="flex items-center space-x-2 flex-1">
@@ -65,10 +57,10 @@
                             class="w-10 h-10 flex items-center justify-center bg-red-200 rounded-full">
                             ⬆️
                         </button>
-                        <input type="file" id="file-input" class="hidden" accept="" name="file_pdf" />
+                        <input type="file" id="file-input" accept=".jpg, .png, .jpeg" class="hidden" accept="" name="path_img" />
                     </div>
                 </div>
-                <p class="text-sm text-gray-500">Format file : .jpg/.png/.jpeg, ukuran maksimal 2MB dan resolusi minimal 1080x1350 px</p>
+                <p class="text-sm text-gray-500">Format file : .jpg/.png/.jpeg, ukuran maksimal 2MB dan resolusi minimal 1080x608 px</p>
                 <script>
                     document.getElementById('upload-button').addEventListener('click', function() {
                         document.getElementById('file-input').click(); // Trigger file input when button is clicked
@@ -106,7 +98,7 @@
                         NO
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Nama Informasi
+                        Judul
                     </th>
                   <th scope="col" class="px-6 py-3">
                     Deskripsi
@@ -115,21 +107,19 @@
                         Status
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Nama Dokumen
+                        Path Dokumen
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Tanggal Upload
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        Path Dokumen
-                    </th>
+                
                     <th scope="col" class="px-6 py-3">
                         Action
                     </th>
                 </tr>
             </thead>
             <tbody>
-                @if ($infografis->isEmpty())
+                @if ($galeris->isEmpty())
                     <tr class="bg-white border-b border-gray-200">
                         <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-center" colspan="9">
                             Data kosong
@@ -139,18 +129,18 @@
                     @php
                         $no = 1;
                     @endphp
-                    @foreach ($infografis as $key => $item)
+                    @foreach ($galeris as $index => $item)
                         <tr class="bg-white border-b border-gray-200">
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                {{ $infografis->firstItem() + $key }}
+                                {{ $galeris->firstItem() + $index }}
                             </th>
-                            <td class="px-6 py-4 truncate">{{ $item->nama_infografis }}</td>
+                            <td class="px-6 py-4 truncate">{{ $item->title }}</td>
                             <td class="px-6 py-4 truncate">{{ $item->description }}</td>
                             <td class="px-6 py-4 truncate"> {{ $item->is_active ? 'Aktif' : 'Tidak Aktif' }}</td>
-                            <td class="px-6 py-4 truncate">{{ $item->nama_dokumen }}</td>
+                            <td class="px-6 py-4 truncate">{{ $item->path_img }}</td>
                             <td class="px-6 py-4">
                                 {{ \Carbon\Carbon::parse($item->created_at)->locale('id')->isoFormat('D MMMM YYYY') }}</td>
-                            <td class="px-6 py-4 truncate">{{ $item->path_dokumen }}</td>
+                            {{-- <td class="px-6 py-4 truncate">{{ $item->path_dokumen }}</td> --}}
                             <td class="px-6 py-4 flex items-center space-x-4">
                                 <!-- Edit Icon -->
                                 <div class="group relative">
@@ -186,7 +176,7 @@
             </tbody>
         </table>
         <div class="p-4">
-            {{ $infografis->links('pagination::tailwind') }}
+            {{ $galeris->links('pagination::tailwind') }}
         </div>
     </div>
 @endsection

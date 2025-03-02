@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\AplikasiLayanan;
 use App\Models\InformasiPublikDetail;
 use App\Models\FileInformasiPublik;
+use App\Models\Galeri;
 use Faker\Core\File;
 
 class StoreController extends Controller
@@ -217,6 +218,50 @@ class StoreController extends Controller
             return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
         }
         
+    }
+
+    public function store_galery(Request $request){
+
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'path_img' => 'required|mimes:jpeg,jpg,png,gif|max:5048',
+            'is_active' => 'sometimes|accepted'
+        ], [
+            'title.required' => 'Title tidak boleh kosong',
+            'description.required' => 'Description tidak boleh kosong',
+            'path_img.required' => 'Upload Gambar tidak boleh kosong',
+            'path_img.mimes' => 'Gambar harus berformat Gambar',
+            'path_img.max' => 'Gambar maksimal 5MB'
+        ]);
+        try {
+            $filePath = null;
+            
+            // Handle file upload
+            if ($request->hasFile('path_img')) {
+                $file = $request->file('path_img');
+                $fileName = time() . '-' . $request->title . '.' . $file->getClientOriginalExtension();
+                $filePath = $file->storeAs('galeri', $fileName, 'public');
+            }
+    
+            // Create informasi publik
+            $informasi = Galeri::create([
+                'title' => $validatedData['title'],
+                'description' => $validatedData['description'],
+                'path_img' => $filePath ? str_replace('public/', '', $filePath) : null,
+                'is_active' => $request->has('is_active'),
+                'post_by' => Auth::user()->name ?? null,
+            ]);
+    
+            Alert::success('Berhasil', 'Data berhasil disimpan');
+            return redirect()->back();
+    
+        } catch (\Exception $e) {
+            if (isset($filePath)) {
+                Storage::disk('public')->delete($filePath);
+            }
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
     public function store_aplikasi_layanan_publik(Request $request)
