@@ -4,7 +4,7 @@
     <section id="hero" class="py-16 my-20 mx-auto">
         <div class="container mx-auto px-8">
             <div class="flex flex-col lg:flex-col gap-8">
-                <div class="max-w-full bg-white rounded-lg shadow-lg p-8 md:p-12">
+                <div class="max-w-full bg-white rounded-lg shadow-lg p-8 md:p-12 ">
                     <div class="flex justify-center">
 
                         <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-80 md:rounded-none md:rounded-l-lg p-5"
@@ -12,7 +12,7 @@
                     </div>
                     <h5 class="text-3xl font-semibold text-gray-800 mb-4">Prosedur Sengketa Informasi</h5>
                     <div class="space-y-4 text-gray-700">
-                        <p>
+                        <p class="space-x-4">
                             Pengajuan sengketa informasi publik ke komisi informasi diajukan pemohon informasi publik
                             selambat-lambatnya 14 HARI KERJA sejak diterimanya tanggapan tertulis atas surat keberatan
                             pemohon informasi publik kepada atasan PPID badan publik atau berakhirnya masa 30 HARI KERJA

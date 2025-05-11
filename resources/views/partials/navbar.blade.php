@@ -66,6 +66,10 @@
                 </li>
 
                 <!-- Pelayanan Informasi -->
+                @php
+                    use App\Models\pelayanan_informasi;
+                    $pelayanan_informasi = pelayanan_informasi::all();
+                @endphp
                 <li class="relative group">
                     <a href="javascript:void(0)"
                         class="inline-block py-3 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0">
@@ -80,23 +84,12 @@
                     <div id="dropdown"
                         class="absolute left-0 hidden group-hover:block bg-white divide-y divide-gray-100 rounded-lg shadow w-44 z-10">
                         <ul class="py-2 text-sm text-gray-700">
-                            <li>
-                                <a href="{{ route('maklumat-pelayanan') }}"
-                                    class="block px-4 py-2 hover:bg-gray-100">Maklumat
-                                    Pelayanan</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('prosedur-permintaan-informasi-ppid-sumenep') }}"
-                                    class="block px-4 py-2 hover:bg-gray-100">Prosedur Permintaan Informasi</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('prosedur-pengajuan-keberatan-ppid-sumenep') }}"
-                                    class="block px-4 py-2 hover:bg-gray-100">Prosedur Pengajuan Keberatan</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('prosedur-sengketa-informasi-ppid-sumenep') }}"
-                                    class="block px-4 py-2 hover:bg-gray-100">Prosedur Sengketa Informasi</a>
-                            </li>
+                            @foreach ($pelayanan_informasi as $item)
+                                <li>
+                                    <a href="{{ route('pelayanan-informasi', $item->id) }}"
+                                        class="block px-4 py-2 hover:bg-gray-100">{{ $item->title }}</a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </li>
@@ -131,40 +124,6 @@
                         </ul>
                     </div>
                 </li>
-
-
-
-                {{-- <!-- Informasi Publik -->
-                @php
-                    use App\Models\InformasiPublik;
-                    $informasi_publik = InformasiPublik::all();
-                @endphp
-                <li class="relative group">
-                    <a href="javascript:void(0)"
-                        class="inline-block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0">
-                        Informasi Publik<span class="inline-block align-middle">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-caret-down ml-1" viewBox="0 0 16 16">
-                                <path
-                                    d="M3.204 5h9.592L8 10.481zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659" />
-                            </svg>
-                        </span>
-                    </a>
-                    <div id="dropdown"
-                        class="absolute left-0 hidden group-hover:block bg-white divide-y divide-gray-100 rounded-lg shadow w-44 z-10">
-                        <ul class="py-2 text-sm text-gray-700">
-                            @foreach ($informasi_publik as $item)
-                                @if ($item->is_active == true)
-                                    <li>
-                                        <a target="_blank" href="{{ route('informasi-publik-file', $item->id) }}"
-                                            class="block px-4 py-2 hover:bg-gray-100">{{ $item->nama_informasi }}</a>
-                                    </li>
-                                @endif
-                            @endforeach
-                        </ul>
-                    </div>
-                </li>
- --}}
                 @if (Auth::check())
                     <li class="relative group">
                         <!-- Admin Pembantu -->
@@ -192,36 +151,36 @@
                                 </span>
                             </a>
                         @endif
-                        @if(Auth::user()->role == 'pembantu')
-                        <div id="dropdown"
-                            class="absolute left-0 hidden group-hover:block bg-white divide-y divide-gray-100 rounded-lg shadow w-44 z-10">
-                            <ul class="py-2 text-sm text-gray-700">
-                                <li>
-                                    <a href="{{ route('file-publik') }}"
-                                        class="block px-4 py-2 hover:bg-gray-100">File Informasi Publik</a>
-                                    <a href="{{ route('infografis') }}"
-                                        class="block px-4 py-2 hover:bg-gray-100">Infografis</a>
+                        @if (Auth::user()->role == 'pembantu')
+                            <div id="dropdown"
+                                class="absolute left-0 hidden group-hover:block bg-white divide-y divide-gray-100 rounded-lg shadow w-44 z-10">
+                                <ul class="py-2 text-sm text-gray-700">
+                                    <li>
+                                        <a href="{{ route('file-publik') }}"
+                                            class="block px-4 py-2 hover:bg-gray-100">File Informasi Publik</a>
+                                        <a href="{{ route('infografis') }}"
+                                            class="block px-4 py-2 hover:bg-gray-100">Infografis</a>
                                         <a href="{{ route('galery') }}"
-                                        class="block px-4 py-2 hover:bg-gray-100">Galeri</a>
-                                    <a href="{{ route('aplikasi-layanan-publik') }}"
-                                        class="block px-4 py-2 hover:bg-gray-100">Aplikasi Layanan Publik</a>
-                                </li>
-                            </ul>
-                        </div>
+                                            class="block px-4 py-2 hover:bg-gray-100">Galeri</a>
+                                        <a href="{{ route('aplikasi-layanan-publik') }}"
+                                            class="block px-4 py-2 hover:bg-gray-100">Aplikasi Layanan Publik</a>
+                                    </li>
+                                </ul>
+                            </div>
                         @else
-                        <div id="dropdown"
-                            class="absolute left-0 hidden group-hover:block bg-white divide-y divide-gray-100 rounded-lg shadow w-44 z-10">
-                            <ul class="py-2 text-sm text-gray-700">
-                                <li>
-                                    <a href="{{ route('file-publik') }}"
-                                        class="block px-4 py-2 hover:bg-gray-100">File Informasi Publik</a>
-                                    <a href="{{ route('infografis') }}"
-                                        class="block px-4 py-2 hover:bg-gray-100">Infografis</a>
+                            <div id="dropdown"
+                                class="absolute left-0 hidden group-hover:block bg-white divide-y divide-gray-100 rounded-lg shadow w-44 z-10">
+                                <ul class="py-2 text-sm text-gray-700">
+                                    <li>
+                                        <a href="{{ route('file-publik') }}"
+                                            class="block px-4 py-2 hover:bg-gray-100">File Informasi Publik</a>
+                                        <a href="{{ route('infografis') }}"
+                                            class="block px-4 py-2 hover:bg-gray-100">Infografis</a>
                                         <a href="{{ route('galery') }}"
-                                        class="block px-4 py-2 hover:bg-gray-100">Galeri</a>
-                                </li>
-                            </ul>
-                        </div>
+                                            class="block px-4 py-2 hover:bg-gray-100">Galeri</a>
+                                    </li>
+                                </ul>
+                            </div>
                         @endif
                     </li>
                 @endif

@@ -6,7 +6,7 @@
         <div class="flex flex-col h-full w-full md:flex-row md:items-center md:justify-center">
             <div class="mx-10 h-full flex items-center justify-center order-1 md:order-0">
                 <img src="{{ asset('logo/header2.png') }}" class="h-full md:h-screen z-20" alt="kantor_pemda"
-                    style="filter: drop-shadow(0.5rem 0.5rem 0rem black);" />
+                    style="filter: drop-shadow(0.5rem 0.5rem 0rem rgba(0, 0, 0, 0.548));" />
             </div>
             <div class="flex flex-col items-center justify-center h-full order-0 md:w-1/2 md:order-1">
                 <h1 class="text-white font-bold text-3xl p-5 my-5 text-center md:text-left md:text-6xl z-20">Selamat Datang
@@ -37,7 +37,7 @@
                                 <img src="{{ asset('icon/apk.svg') }}" alt="">
                             </div>
                             <span
-                                class="text-center font-bold text-sm md:text-xl mt-3 truncate">{{ $item->nama_aplikasi }}</span>
+                                class="text-center font-bold text-xs md:text-lg mt-3 ">{{ $item->nama_aplikasi }}</span>
                         </a>
                     @endforeach
                 </div>
@@ -46,46 +46,25 @@
     </section>
 
     {{-- Permohonan informasi --}}
+    @php
+        use App\Models\pelayanan_informasi;
+        $permohonan_informasi = pelayanan_informasi::take(4)->get();
+    @endphp
     <section class="max-w-screen-xl mx-auto mb-20 px-10 md:px-0">
         <div class="mx-auto">
             <div class="p-4">
                 <h1 class="font-bold text-2xl md:text-4xl my-10">Permohonan Informasi</h1>
                 <div class="grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-8">
-                    <a href="{{ route('maklumat-pelayanan') }}" data-aos="fade-up" data-aos-once="true" duration="2000"
-                        class="flex flex-col justify-between items-center w-full bg-red-700 text-white p-4 hover:scale-105 transition-transform duration-300">
-                        <div class="w-24 h-24 mb-2">
-                            <img src="{{ asset('icon/service.png') }}" alt="">
-                        </div>
-                        <span class="text-center font-bold text-sm md:text-lg mt-3 truncate">Maklumat
-                            Pelayanan</span>
-                    </a>
-                    <a href="{{ route('prosedur-permintaan-informasi-ppid-sumenep') }}" data-aos="fade-up"
-                        data-aos-once="true" duration="2000"
-                        class="flex flex-col justify-between items-center w-full bg-red-700 text-white p-4 hover:scale-105 transition-transform duration-300">
-                        <div class="w-24 h-24 mb-2">
-                            <img src="{{ asset('icon/customer-service.png') }}" alt="">
-                        </div>
-                        <span class="text-center font-bold text-sm md:text-lg mt-3 truncate">Prosedur Permintaan
-                            Informasi</span>
-                    </a>
-                    <a href="{{ route('prosedur-pengajuan-keberatan-ppid-sumenep') }}" data-aos="fade-up"
-                        data-aos-once="true" duration="2000"
-                        class="flex flex-col justify-between items-center w-full bg-red-700 text-white p-4 hover:scale-105 transition-transform duration-300">
-                        <div class="w-24 h-24 mb-2">
-                            <img src="{{ asset('icon/self-service.png') }}" alt="">
-                        </div>
-                        <span class="text-center font-bold text-sm md:text-lg mt-3 truncate">Prosedur Pengajuan
-                            Keberatan</span>
-                    </a>
-                    <a href="{{ route('prosedur-sengketa-informasi-ppid-sumenep') }}" data-aos="fade-up"
-                        data-aos-once="true" duration="2000"
-                        class="flex flex-col justify-between items-center w-full bg-red-700 text-white p-4 hover:scale-105 transition-transform duration-300">
-                        <div class="w-24 h-24 mb-2">
-                            <img src="{{ asset('icon/public-service.png') }}" alt="">
-                        </div>
-                        <span class="text-center font-bold text-sm md:text-lg mt-3 truncate">Prosedur Sengketa
-                            Informasi</span>
-                    </a>
+                    @foreach ($permohonan_informasi as $item)
+                        <a href="{{ route('pelayanan-informasi', $item->id) }}" data-aos="fade-up" data-aos-once="true" duration="2000"
+                            class="flex flex-col justify-between items-center w-full bg-red-700 text-white p-4 hover:scale-105 transition-transform duration-300">
+                            <div class="w-24 h-24 mb-2">
+                                <img src="{{ asset('icon/public-service.png') }}" alt="{{ $item->title }}">
+                            </div>
+                            <span class="text-center font-bold text-sm md:text-lg mt-3 truncate">{{ $item->title }}</span>
+                        </a>
+                    @endforeach
+
                 </div>
             </div>
         </div>
@@ -151,7 +130,9 @@
                             1 Sapeken</h5>
                     </a>
                     <p class="mb-3 text-gray-700 line-clamp-3 text-sm">
-                        Media Center, Senin ( 10/06 ) Demi mewujudkan rasa kecintaan generasi muda kepada Negara Kesatuan Republik Indonesia (NKRI) Babinsa Koramil 0827/19 Sapeken Serka Airul Wafa memberikan pembekalan melalui penyuluhan Bela Negara kepada siswa-siswi SMA Negeri 1 Sapeken Kabupaten Sumenep.
+                        Media Center, Senin ( 10/06 ) Demi mewujudkan rasa kecintaan generasi muda kepada Negara Kesatuan
+                        Republik Indonesia (NKRI) Babinsa Koramil 0827/19 Sapeken Serka Airul Wafa memberikan pembekalan
+                        melalui penyuluhan Bela Negara kepada siswa-siswi SMA Negeri 1 Sapeken Kabupaten Sumenep.
                     </p>
                     <a href="https://sumenepkab.go.id/berita/baca/gelar-penyuluhan-bela-negara-bagi-siswa-sma-negeri-1-sapeken"
                         class="inline-flex items-center px-3 py-2 text-sm font-medium text-red-600 border border-red-600 rounded-md hover:bg-red-600 hover:text-white transition-all">
@@ -268,8 +249,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             @foreach ($infografis as $data)
                 @if ($data->is_active == true)
-                    <div
-                        class="group bg-white border border-gray-100 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col h-full">
+                    <div class="group bg-white border border-gray-100 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col h-full">
                         <div class="relative overflow-hidden aspect-[4/5]">
                             <img src="{{ asset('storage/' . $data->path_dokumen) }}" alt="{{ $data->nama_dokumen }}"
                                 class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
@@ -277,8 +257,7 @@
                             <div class="absolute inset-0 bg-gradient-to-t from-red-800 to-transparent opacity-70"></div>
                         </div>
 
-                        <div
-                            class="relative flex-1 bg-gradient-to-r from-red-700 to-red-800 p-6 flex flex-col justify-between">
+                        <div class="relative flex-1 bg-gradient-to-r from-red-700 to-red-800 p-6 flex flex-col justify-between">
                             <div class="absolute top-0 right-0 w-24 h-24 opacity-10">
                                 <img src="{{ asset('icon/keris.png') }}" class="w-full" alt="Keris" />
                             </div>
@@ -287,8 +266,8 @@
                             <p class="text-red-100 text-sm mb-4 line-clamp-3">
                                 {{ $data->description ?? 'Informasi visual interaktif yang menyajikan data dan wawasan penting dalam format yang mudah dipahami.' }}
                             </p>
-                            <div class="flex items-center mb-4">
-                                <div class="flex items-center bg-red-900/30 rounded-full px-3 py-1">
+                            <div class="flex flex-col space-y-2">
+                                <div class="flex items-center bg-red-900/30 rounded-full px-3 py-1 w-fit">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-red-100 mr-1"
                                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -296,6 +275,14 @@
                                     </svg>
                                     <span class="text-red-100 text-xs font-medium">
                                         Posted by: <span class="text-white ml-1">{{ $data->post_by }}</span>
+                                    </span>
+                                </div>
+                                <div class="flex items-center bg-red-900/30 rounded-full px-3 py-1 w-fit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-red-100 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                    <span class="text-red-100 text-xs font-medium">
+                                        {{ $data->created_at->format('l, d M Y H:i') }}
                                     </span>
                                 </div>
                             </div>
@@ -312,7 +299,7 @@
         <div class="grid grid-cols-2 gap-2 md:grid-cols-5 md:gap-8 select-none">
             <!-- Instagram -->
             <a href="https://www.instagram.com/kominfosumenep/" target="_blank"
-                class="flex flex-col justify-between items-center w-full bg-gradient-to-r from-red-600 to-red-800 text-white p-4 hover:-translate-y-1 hover:-translate-x-1 transition-transform duration-200 hover:shadow-[7px_7px_0px_0px_rgba(0,0,0,1)]">
+                class="flex flex-col justify-between items-center rounded-lg w-full bg-gradient-to-r from-red-600 to-red-800 text-white p-4 hover:-translate-y-1 hover:-translate-x-1 transition-transform duration-200 hover:shadow-[7px_7px_0px_0px_rgba(0,0,0,1)]">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-instagram w-24 h-24 mb-2"
                     viewBox="0 0 16 16">
                     <path
@@ -323,7 +310,7 @@
 
             <!-- Facebook -->
             <a href="https://www.facebook.com/kominfo.sumenep" target="_blank"
-                class="flex flex-col justify-between items-center w-full bg-gradient-to-r from-red-600 to-red-800 text-white p-4 hover:-translate-y-1 hover:-translate-x-1 transition-transform duration-200 hover:shadow-[7px_7px_0px_0px_rgba(0,0,0,1)]">
+                class="flex flex-col justify-between items-center rounded-lg w-full bg-gradient-to-r from-red-600 to-red-800 text-white p-4 hover:-translate-y-1 hover:-translate-x-1 transition-transform duration-200 hover:shadow-[7px_7px_0px_0px_rgba(0,0,0,1)]">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-facebook w-24 h-24 mb-2"
                     viewBox="0 0 16 16">
                     <path
@@ -334,7 +321,7 @@
 
             <!-- YouTube -->
             <a href="https://www.youtube.com/@kominfosumenep" target="_blank"
-                class="flex flex-col justify-between items-center w-full bg-gradient-to-r from-red-600 to-red-800 text-white p-4 hover:-translate-y-1 hover:-translate-x-1 transition-transform duration-200 hover:shadow-[7px_7px_0px_0px_rgba(0,0,0,1)]">
+                class="flex flex-col justify-between items-center rounded-lg w-full bg-gradient-to-r from-red-600 to-red-800 text-white p-4 hover:-translate-y-1 hover:-translate-x-1 transition-transform duration-200 hover:shadow-[7px_7px_0px_0px_rgba(0,0,0,1)]">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-youtube w-24 h-24 mb-2"
                     viewBox="0 0 16 16">
                     <path
@@ -345,7 +332,7 @@
 
             <!-- Twitter -->
             <a href="https://twitter.com/kominfosumenep" target="_blank"
-                class="flex flex-col justify-between items-center w-full bg-gradient-to-r from-red-600 to-red-800 text-white p-4 hover:-translate-y-1 hover:-translate-x-1 transition-transform duration-200 hover:shadow-[7px_7px_0px_0px_rgba(0,0,0,1)]">
+                class="flex flex-col justify-between items-center rounded-lg w-full bg-gradient-to-r from-red-600 to-red-800 text-white p-4 hover:-translate-y-1 hover:-translate-x-1 transition-transform duration-200 hover:shadow-[7px_7px_0px_0px_rgba(0,0,0,1)]">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-twitter-x w-24 h-24 mb-2"
                     viewBox="0 0 16 16">
                     <path
@@ -356,7 +343,7 @@
 
             <!-- TikTok -->
             <a href="https://www.tiktok.com/@kominfo.sumenep?is_from_webapp=1&sender_device=pc" target="_blank"
-                class="flex flex-col justify-between items-center w-full bg-gradient-to-r from-red-600 to-red-800 text-white p-4 hover:-translate-y-1 hover:-translate-x-1 transition-transform duration-200 hover:shadow-[7px_7px_0px_0px_rgba(0,0,0,1)]">
+                class="flex flex-col justify-between items-center rounded-lg w-full bg-gradient-to-r from-red-600 to-red-800 text-white p-4 hover:-translate-y-1 hover:-translate-x-1 transition-transform duration-200 hover:shadow-[7px_7px_0px_0px_rgba(0,0,0,1)]">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-tiktok w-24 h-24 mb-2"
                     viewBox="0 0 16 16">
                     <path

@@ -11,7 +11,7 @@ use App\Models\AplikasiLayanan;
 use App\Models\InformasiPublikDetail;
 use App\Models\FileInformasiPublik;
 use App\Models\Galeri;
-
+use App\Models\pelayanan_informasi;
 
 class UserController extends Controller
 {
@@ -78,6 +78,13 @@ class UserController extends Controller
     public function pengembang_ppid()
     {
         return view('user.pages.pengembang-ppid');
+    }
+
+    public function pelayanan_informasi_detail($id)
+    {
+        $pelayanan_informasi = pelayanan_informasi::find($id);
+        // dd($pelayanan_informasi);
+        return view('user.pages.pelayanan-informasi', compact('pelayanan_informasi'));
     }
 
     public function informasi_publik_detail($id)    

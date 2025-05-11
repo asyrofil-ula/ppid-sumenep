@@ -3,79 +3,126 @@
 @section('title', 'Aplikasi Layanan Publik')
 
 @section('content')
-    <div class="my-40">
-        <div class="max-w-screen-sm mx-auto">
-            <div class="flex justify-center h-16 md:h-28 p-1">
-                <img src="{{ asset('logo/logo_ppid.png') }}" alt="logo_ppid" class="h-full"><span
-                    class="border-l-4 md:border-l-8-2 border-black"></span>
-                <h1 class="flex flex-col justify-center w-fit md:text-3xl font-bold ml-4">
-                    <span>Sistem Informasi dan</span>
-                    <span>Dokumentasi Publik</span>
-                </h1>
-            </div>
-            <div class="w-full bg-red-700 mt-10 p-4 px-20 h-100 rounded-sm">
+<div class="my-20 px-4">
+    <div class="flex items-center p-4 mt-20  justify-center min-h-[100px]">
+        <div class="flex items-center space-x-3">
+            <img src="{{ asset('logo/logo_ppid.png') }}" alt="Logo" class="h-12">
+        </div>
+        <div class="border-l-2 border-gray-400 h-10 mx-4"></div>
+        <p class="text-lg font-bold text-gray-700">Sistem Informasi dan <br> Dokumentasi Publik</p>
+    </div>
+    <hr class="border-t-2 border-gray-400 w-full my-4">
+    <div class="max-w-screen-lg mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        
+        <!-- FORM -->
+        <div class="card w-full bg-white p-6 shadow-md border-l-4 border-red-500 rounded-md flex flex-col items-center space-y-4 md:space-y-6 md:space-x-0 justify-center">
+            <div class="flex flex-col text-center">
                 @if (Auth::user()->role == 'pembantu')
-                    <h1 class="text-2xl font-bold text-center text-white">ADMIN PPID Pembantu</h1>
+                    <h1 class="text-xl md:text-2xl font-bold">ADMIN PPID Pembantu</h1>
                 @elseif(Auth::user()->role == 'user')
-                    <h1 class="text-2xl font-bold text-center text-white">PPID Desa</h1>
+                    <h1 class="text-xl md:text-2xl font-bold">PPID Desa</h1>
                 @else
-                    <h1 class="text-2xl font-bold text-center text-white">ADMIN PPID</h1>
+                    <h1 class="text-xl md:text-2xl font-bold">ADMIN PPID</h1>
                 @endif
-                <h2 class="text font-bold text-center text-white">Aplikasi Layanan Publik Dinas Komunikasi dan Informatika
+                <h2 class="text-sm md:text-lg font-bold mt-2">
+                    Aplikasi Layanan Publik Dinas Komunikasi dan Informatika
                 </h2>
-                <form method="POST" action="{{ route('aplikasi-layanan-publik.store') }}" enctype="multipart/form-data">
-                    @csrf
-                    <div class="flex flex-col mt-4">
-                        <label for="nama_aplikasi" class="text-white mb-1">Nama Aplikasi</label>
-                        <input type="text" name="nama_aplikasi" id="" class="p-2 border border-gray-800 rounded"
-                            placeholder="Nama Aplikasi">
-                        @error('nama_aplikasi')
-                            <span class="text-white mt-1 text-sm">- {{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="flex flex-col my-4">
-                        <label for="description" class="text-white mb-1">Deskripsi Singkat tentang Aplikasi</label>
-                        <textarea name="description" id="description" row="50"
-                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Deskripsi Singkat tentang Aplikasi"></textarea>
-                        @error('description')
-                            <span class="text-white mt-1 text-sm">- {{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="flex w-full justify-between items-end">
-                        <div class="flex flex-col w-full mr-5">
-                            <label for="link" class="text-white mb-1">Alamat Website</label>
-                            <input type="text" name="link" id="link" class="p-2 border border-gray-800 rounded"
-                                placeholder="Alamat Website">
-                        </div>
-                        <input type="checkbox" class="w-6 h-6 border rounded text-red-500" name="is_active">
-                    </div>
-                    @error('link')
-                        <span class="text-white mt-1 text-sm">- {{ $message }}</span>
-                    @enderror
-                    <div class="flex justify-center mt-4">
-                        <button type="submit"
-                            class="w-full py-3 bg-red-400 border-2 border-red-400 text-white rounded hover:bg-red-500">Simpan</button>
-                    </div>
-                </form>
             </div>
-            <div class="bg-red-700 text-white p-4 mt-4 rounded">
-                <ul>
-                    <li>Jangan lupa di checklist agar informasi dapat di tampilkan</li>
+
+            <form method="POST" action="{{ route('aplikasi-layanan-publik.store') }}" enctype="multipart/form-data" class="mt-6 flex flex-col flex-grow">
+                @csrf
+
+                <!-- Nama Aplikasi -->
+                <div class="flex flex-col">
+                    <label for="nama_aplikasi" class=" text-sm md:text-base mb-1">Nama Aplikasi <span class="text-red-500">*</span></label>
+                    <input type="text" name="nama_aplikasi" class="p-2 border border-gray-800 rounded text-sm md:text-base" placeholder="Nama Aplikasi" required>
+                    @error('nama_aplikasi')
+                        <span class=" mt-1 text-sm">- {{ $message }}</span>
+                    @enderror
+                </div>
+
+                <!-- Deskripsi -->
+                <div class="flex flex-col my-4">
+                    <label for="description" class=" text-sm md:text-base mb-1">Deskripsi Singkat <span><span class="text-red-500">*</span></span></label>
+                    <textarea name="description" rows="3" class="p-2 w-full text-sm md:text-base border border-gray-300 rounded-lg"
+                        placeholder="Deskripsi Singkat tentang Aplikasi" required></textarea>
+                    @error('description')
+                        <span class=" mt-1 text-sm">- {{ $message }}</span>
+                    @enderror
+                </div>
+
+                <!-- Alamat Website + Checkbox -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+                    <div class="flex flex-col">
+                        <label for="link" class=" text-sm md:text-base mb-1">Alamat Website <span class="text-red-500">*</span></label>
+                        <input type="text" name="link" class="p-2 border border-gray-800 rounded text-sm md:text-base" placeholder="Alamat Website">
+                        @error('link')
+                            <span class=" mt-1 text-sm">- {{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="flex items-center mt-2 md:mt-7">
+                        <input type="checkbox" class="w-6 h-6 border rounded text-red-500 mr-2" name="is_active">
+                        <span class=" text-sm md:text-base">Tampilkan Informasi</span>
+                    </div>
+                </div>
+
+                <!-- Tombol Simpan -->
+                <div class="flex justify-center mt-6">
+                    <button type="submit"
+                        class="w-full py-3 bg-red-400 border-2 border-red-400 text-white font-bold rounded hover:bg-red-500 transition duration-300 text-sm md:text-base">
+                        Simpan
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- PANEL INFORMASI (PANDUAN + PERINGATAN) -->
+        <div class="space-y-6 flex flex-col h-full min-h-[400px]">
+
+            <!-- 📘 Panduan Pengisian -->
+            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-500 flex-grow">
+                <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    📘 Panduan Pengisian
+                </h2>
+                <ul class="space-y-3 text-gray-600 text-sm">
+                    <li><strong>📂 Persiapkan Dokumen:</strong> Siapkan semua informasi sebelum mengisi formulir.</li>
+                    <li><strong>✏️ Isi Data dengan Lengkap:</strong> Kolom bertanda * wajib diisi.</li>
+                    <li><strong>📄 Unggah File yang Sesuai:</strong> File harus dalam format PDF (jika ada).</li>
+                    <li><strong>🔍 Periksa Kembali:</strong> Pastikan semua data benar sebelum disimpan.</li>
                 </ul>
             </div>
+
+            <!-- ⚠️ Peringatan -->
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-5 rounded-lg shadow-md flex-grow">
+                <h3 class="text-lg font-bold text-yellow-800 mb-2">⚠️ Peringatan!</h3>
+                <p class="text-yellow-700 text-sm">
+                    Data yang sudah tersimpan <strong>tidak dapat diedit atau dihapus</strong>. Pastikan seluruh informasi yang dimasukkan sudah benar sebelum menyimpan data.
+                </p>
+                <div class="mt-3 bg-yellow-100 p-3 rounded-md text-sm text-yellow-800 border border-yellow-300">
+                    <p class="font-semibold">Jika terdapat kesalahan data setelah disimpan:</p>
+                    <ul class="list-disc list-inside mt-1 space-y-1">
+                        <li>Hubungi administrator sistem di <strong>(0328) 123456</strong></li>
+                        <li>Kirim email ke <strong>ppid@sumenepkab.go.id</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Error Handling -->
             @if ($errors->any())
-                <div class="bg-red-300 text-white p-4 mt-4 rounded">
-                    <ul class="li list-decimal p-3">
+                <div class="bg-red-300 text-white p-4 rounded">
+                    <ul class="list-disc list-inside text-sm md:text-base">
                         @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
+                            <li>❌ {{ $error }}</li>
                         @endforeach
                     </ul>
                 </div>
             @endif
+
         </div>
     </div>
+</div>
 
+    <hr class="border-t-2 border-gray-400 w-full my-4">
 
     <div class="max-w-screen-xl mx-auto relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left rtl:text-right text-black">

@@ -23,6 +23,8 @@ class InformasiPublikDetailResource extends Resource
     protected static ?string $model = InformasiPublikDetail::class;
     protected static ?string $slug = 'informasi-publik-detail';
     protected static ?string $label = 'Jenis Informasi Publik Detail';
+    public static ?string $pluralLabel = 'Jenis Informasi Publik Detail';
+
     // protected static ?string $navigationGroup = 'Manajemen Konten';
 
 

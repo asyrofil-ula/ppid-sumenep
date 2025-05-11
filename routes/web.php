@@ -22,6 +22,7 @@ Route::get('/prosedur-pengajuan-keberatan-ppid-sumenep', [UserController::class,
 Route::get('/prosedur-sengketa-informasi-ppid-sumenep', [UserController::class, 'prosedur_sengketa_informasi_ppid_sumenep'])->name('prosedur-sengketa-informasi-ppid-sumenep');
 Route::get('/informasi-publik/{id}/detail', [UserController::class, 'informasi_publik_detail'])->name('informasi-publik-detail');
 
+Route::get('/pelayanan-informasi/{id}/detail', [UserController::class, 'pelayanan_informasi_detail'])->name('pelayanan-informasi');
 Route::get('/infografis-ppid', [UserController::class, 'infografis_user'])->name('infografis-ppid');
 Route::get('/galeri-ppid', [UserController::class, 'galeri'])->name('galeri');
 Route::get('pengembang-ppid', [UserController::class, 'pengembang_ppid'])->name('pengembang-ppid');
@@ -32,6 +33,11 @@ Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginSubmit'])->name('login.submit');
 Route::get('/register', [UserController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'registerSubmit'])->name('register.submit');
+
+Route::get('/forgot-password', [\App\Http\Controllers\ForgotPasswordController::class, 'index'])->name('password.request');
+Route::post('/forgot-password', [\App\Http\Controllers\ForgotPasswordController::class, 'store'])->name('password.email');
+Route::get('/reset-password/{token}', [\App\Http\Controllers\ResetPasswordController::class, 'index'])->name('password.reset');
+Route::post('/reset-password', [\App\Http\Controllers\ResetPasswordController::class, 'store'])->name('password.update');
 
 // Logout
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -87,7 +93,7 @@ Route::middleware(CheckAuth::class, 'auth')->group(function () {
         return back();
     })->name('aplikasi-layanan-publik.destroy');
 
-    // edit 
+    // edit
     Route::get('/informasi-publik/edit/admin', function () {
         Alert::info('Peringatan', 'Edit hanya bisa dilakukan oleh admin, hubungi admin untuk mengubah data');
         return back();

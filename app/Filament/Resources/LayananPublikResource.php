@@ -19,6 +19,7 @@ class LayananPublikResource extends Resource
     protected static ?string $model = AplikasiLayanan::class;
     protected static ?string $slug = 'aplikasi-layanan-publik';
     public static ?string $label = 'Aplikasi Layanan Publik';
+    public static ?string $pluralLabel = 'Aplikasi Layanan Publik';
     protected static ?string $navigationGroup = 'Manajemen Konten';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 

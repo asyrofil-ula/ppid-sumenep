@@ -10,6 +10,9 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Tables\Columns\ImageColumn;
+use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
+use Filament\Forms\Components\FileUpload;
 
 class GaleriResource extends Resource
 {
@@ -17,6 +20,7 @@ class GaleriResource extends Resource
     protected static ?string $slug = 'galeri';
     public static ?string $label = 'Galeri';
     protected static ?string $navigationGroup = 'Manajemen Konten';
+    public static ?string $pluralLabel = 'Galeri';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
@@ -39,14 +43,20 @@ class GaleriResource extends Resource
                         '1' => 'Aktif',
                     ])
                     ->required(),
-                Forms\Components\FileUpload::make('path_img')
-                    ->label('File')
+                FileUpload::make('path_img')
                     ->disk('public')
                     ->directory('galeri')
+                    ->label('galeri')
+                    ->required()
+                    ->preserveFilenames()
                     ->image()
                     ->imageEditor()
-                    ->required()
-                    ->helperText('Unggah gambar dengan ukuran 1080x608 px.'),
+                    ->helperText('Unggah gambar dengan ukuran 1080x608 px.')
+                    ->getUploadedFileNameForStorageUsing(
+                        fn(TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
+                            ->prepend('galeri-'),
+                    )
+                    ->columnSpan(2),
             ]);
     }
 
@@ -66,15 +76,16 @@ class GaleriResource extends Resource
                     ->label('Di Posting Oleh')
                     ->searchable()
                     ->sortable(),
-                    TextColumn::make('is_active')
+                TextColumn::make('is_active')
                     ->getStateUsing(fn(Galeri $record) => $record->is_active ? 'Aktif' : 'Tidak Aktif')
                     ->color(fn(Galeri $record) => $record->is_active ? 'success' : 'danger')
                     ->badge()
                     ->label('Status')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('path_img')
-                    ->label('Path Gambar')
-                    ->sortable(),
+                ImageColumn::make('path_img')
+                    ->getStateUsing(fn(Galeri $record) => asset('storage/' . $record->path_img))
+                    ->label('Gambar')
+                    ->circular(),
             ])
             ->filters([
                 //

@@ -5,7 +5,7 @@
     <div class="flex justify-center my-40">
         <a href="javascript:void(0)"
             class="flex flex-col items-center  bg-white border border-gray-200 rounded-xl shadow-lg hover:shadow-2xl md:max-w-4xl w-full p-10">
-            <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-80 md:rounded-none md:rounded-l-lg"
+            <img class="object-cover w-full rounded-t-lg object-contain w-48 md:w-64"
                 src="{{ asset('logo/logo_ppid.png') }}" alt="">
             <div class="flex flex-col justify-between p-4 leading-normal w-full">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">VISI dan MISI PPID SUMENEP</h5><br>

@@ -10,91 +10,100 @@
         <p class="text-lg font-bold text-gray-700">Sistem Informasi dan <br> Dokumentasi Publik</p>
     </div>
     <hr class="border-t-2 border-gray-400 w-full my-4">
+    <div class="flex justify-center p-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[1200px] w-full">
 
-    <div class="flex justify-center items-center min-h-screen ">
-        <div class="p-6 rounded-md w-[600px]">
-            @if (Auth::user()->role == 'admin')
-            <h1 class="text-xl font-bold text-center w-full mb-6">
-                ADMIN PPID Pembantu : Infografis Dinas Komunikasi dan Informatika
-            </h1>
-            @elseif (Auth::user()->role == 'pembantu')
-            <h1 class="text-xl font-bold text-center w-full mb-6">
-                ADMIN PPID Pembantu : Infografis Dinas Komunikasi dan Informatika
-            </h1>
-            @else
-            <h1 class="text-xl font-bold text-center w-full mb-6">
-                PPID Desa : Infografis Dinas Komunikasi dan Informatika
-            </h1>
-            @endif
+            <!-- FORM -->
+            <div
+                class="card w-full bg-white p-6 shadow-md border-l-4 border-red-500 rounded-md flex flex-col items-center space-y-4 md:space-y-6 md:space-x-0 justify-center">
 
-            <form class="space-y-4" method="POST" action="{{ route('infografis.store') }}" enctype="multipart/form-data">
-                @csrf
-                <!-- 1. Nama Informasi -->
-                <div class="flex items-center space-x-4">
-                    <label class="font-semibold w-1/3">Nama Infografis</label>
-                    <input type="text" class="flex-1 border rounded px-3 py-2 w-full truncate"
-                        placeholder="Nama Infografis" name="nama_infografis" required>
-                    @error('nama_infografis')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                    @enderror
-                </div>
-                {{-- 2. Deskripsi --}}
-                <div class="flex items-center space-x-4">
-                    <label class="font-semibold w-1/3">Deskripsi</label>
-                    <input type="text" class="flex-1 border rounded px-3 py-2 w-full truncate" placeholder="Deskripsi"
-                        name="description" required>
-                    @error('description')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                    @enderror
-                </div>
+                @if (Auth::user()->role == 'admin')
+                    <h1 class="text-xl font-bold text-center w-full mb-6">
+                        ADMIN PPID Pembantu : Infografis Dinas Komunikasi dan Informatika
+                    </h1>
+                @elseif (Auth::user()->role == 'pembantu')
+                    <h1 class="text-xl font-bold text-center w-full mb-6">
+                        ADMIN PPID Pembantu : Infografis Dinas Komunikasi dan Informatika
+                    </h1>
+                @else
+                    <h1 class="text-xl font-bold text-center w-full mb-6">
+                        PPID Desa : Infografis Dinas Komunikasi dan Informatika
+                    </h1>
+                @endif
 
-
-                <div class="flex items-center space-x-4">
-                    <label class="font-semibold w-1/3">Nama Dokumen</label>
-                    <input type="text" class="flex-1 border rounded px-3 py-2 w-full truncate" placeholder="Nama Dokumen"
-                        name="nama_dokumen">
-                </div>
-
-                <div class="flex items-center space-x-4">
-                    <label class="font-semibold w-1/3">Upload Gambar</label>
-                    <div class="flex items-center space-x-2 flex-1">
-                        <input type="text" id="file-name" class="flex-1 border rounded px-3 py-2 w-full truncate"
-                            placeholder="NamaFileGambar.jpg/.png/.jpeg" readonly>
-                        <input type="checkbox" class="w-6 h-6 border rounded text-red-500" name="is_active">
-                        <button type="button" id="upload-button"
-                            class="w-10 h-10 flex items-center justify-center bg-red-200 rounded-full">
-                            ⬆️
-                        </button>
-                        <input type="file" id="file-input" class="hidden" accept="" name="file_pdf" />
+                <form class="space-y-4" method="POST" action="{{ route('infografis.store') }}"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <!-- 1. Nama Informasi -->
+                    <div class="flex items-center space-x-4">
+                        <label class="font-semibold w-1/3">Nama Infografis</label>
+                        <input type="text" class="flex-1 border rounded px-3 py-2 w-full truncate"
+                            placeholder="Nama Infografis" name="nama_infografis" required>
+                        @error('nama_infografis')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
-                </div>
-                <p class="text-sm text-gray-500">Format file : .jpg/.png/.jpeg, ukuran maksimal 2MB dan resolusi minimal 1080x1350 px</p>
-                <script>
-                    document.getElementById('upload-button').addEventListener('click', function() {
-                        document.getElementById('file-input').click(); // Trigger file input when button is clicked
-                    });
+                    {{-- 2. Deskripsi --}}
+                    <div class="flex items-center space-x-4">
+                        <label class="font-semibold w-1/3">Deskripsi</label>
+                        <input type="text" class="flex-1 border rounded px-3 py-2 w-full truncate"
+                            placeholder="Deskripsi" name="description" required>
+                        @error('description')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
 
-                    document.getElementById('file-input').addEventListener('change', function(event) {
-                        var file = event.target.files[0]; // Get the selected file
-                        if (file) {
-                            document.getElementById('file-name').value = file.name; // Display file name in the text box
-                        }
-                    });
-                </script>
-                <button type="submit"
-                    class="w-full bg-red-400 text-white border-2 border-red-400 font-bold py-2 hover:bg-red-500 rounded">
-                    Simpan
-                </button>
-            </form>
-            @if ($errors->any())
-                <div class="bg-red-300 text-white p-4 mt-4 rounded">
-                    <ul class="li list-decimal p-3">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+
+                    <div class="flex items-center space-x-4">
+                        <label class="font-semibold w-1/3">Nama Dokumen</label>
+                        <input type="text" class="flex-1 border rounded px-3 py-2 w-full truncate"
+                            placeholder="Nama Dokumen" name="nama_dokumen">
+                    </div>
+
+                    <div class="flex items-center space-x-4">
+                        <label class="font-semibold w-1/3">Upload Gambar</label>
+                        <div class="flex items-center space-x-2 flex-1">
+                            <input type="text" id="file-name" class="flex-1 border rounded px-3 py-2 w-full truncate"
+                                placeholder="NamaFileGambar.jpg/.png/.jpeg" readonly>
+                            <input type="checkbox" class="w-6 h-6 border rounded text-red-500" name="is_active">
+                            <button type="button" id="upload-button"
+                                class="w-10 h-10 flex items-center justify-center bg-red-200 rounded-full">
+                                ⬆️
+                            </button>
+                            <input type="file" id="file-input" class="hidden" accept=".jpg, .png, .jpeg"
+                                name="file_pdf" />
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500">Format file : .jpg/.png/.jpeg, ukuran maksimal 2MB dan resolusi minimal
+                        1080x1350 px</p>
+                    <script>
+                        document.getElementById('upload-button').addEventListener('click', function() {
+                            document.getElementById('file-input').click(); // Trigger file input when button is clicked
+                        });
+
+                        document.getElementById('file-input').addEventListener('change', function(event) {
+                            var file = event.target.files[0]; // Get the selected file
+                            if (file) {
+                                document.getElementById('file-name').value = file.name; // Display file name in the text box
+                            }
+                        });
+                    </script>
+                    <button type="submit"
+                        class="w-full bg-red-400 text-white border-2 border-red-400 font-bold py-2 hover:bg-red-500 rounded">
+                        Simpan
+                    </button>
+                </form>
+                @if ($errors->any())
+                    <div class="bg-red-300 text-white p-4 mt-4 rounded">
+                        <ul class="li list-decimal p-3">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </div>
+            @include('components.panduan')
         </div>
     </div>
     <hr class="border-t-2 border-gray-400 w-full my-4">
@@ -108,9 +117,9 @@
                     <th scope="col" class="px-6 py-3">
                         Nama Informasi
                     </th>
-                  <th scope="col" class="px-6 py-3">
-                    Deskripsi
-                  </th>
+                    <th scope="col" class="px-6 py-3">
+                        Deskripsi
+                    </th>
                     <th scope="col" class="px-6 py-3">
                         Status
                     </th>
@@ -121,7 +130,7 @@
                         Tanggal Upload
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Path Dokumen
+                        Gambar
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Action
@@ -150,7 +159,8 @@
                             <td class="px-6 py-4 truncate">{{ $item->nama_dokumen }}</td>
                             <td class="px-6 py-4">
                                 {{ \Carbon\Carbon::parse($item->created_at)->locale('id')->isoFormat('D MMMM YYYY') }}</td>
-                            <td class="px-6 py-4 truncate">{{ $item->path_dokumen }}</td>
+                            <td class="px-6 py-4 truncate"><img src="{{ asset('storage/' . $item->path_dokumen) }}"
+                                    alt="{{ $item->nama_dokumen }}"></td>
                             <td class="px-6 py-4 flex items-center space-x-4">
                                 <!-- Edit Icon -->
                                 <div class="group relative">
@@ -166,8 +176,7 @@
                                 </div>
                                 <!-- Delete Icon -->
                                 <div class="group relative">
-                                    <a href="{{ route('infografis.destroy') }}"
-                                        class="text-red-600 hover:text-red-700">
+                                    <a href="{{ route('infografis.destroy') }}" class="text-red-600 hover:text-red-700">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                             <path

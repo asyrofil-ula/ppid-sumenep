@@ -34,6 +34,7 @@ class FileInformasiPublikResource extends Resource
     protected static ?string $navigationGroup = 'Manajemen Konten';
     protected static ?string $slug = 'file-informasi-publik';
     protected static ?string $label = 'File Informasi Publik';
+    protected static ?string $pluralLabel = 'File Informasi Publik';
 
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';

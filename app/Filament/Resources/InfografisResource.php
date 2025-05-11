@@ -12,9 +12,7 @@ use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Forms\Components\Select;
-use App\Models\KlasifikasiInformasi;
-use App\Models\JenisInformasi;
-use App\Models\DetailJenisInformasi;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Console\View\Components\Info;
@@ -36,27 +34,7 @@ class InfografisResource extends Resource
                 TextInput::make('nama_infografis')
                     ->label('Nama Infografis')
                     ->required(),
-                // Select::make('klasifikasi_informasi_id')
-                //     ->label('Klasifikasi Informasi')
-                //     ->options(function () {
-                //         return KlasifikasiInformasi::pluck('klasifikasi_informasi', 'id')->toArray();
-                //     })
-                //     ->searchable()
-                //     ->required(),
-                // Select::make('jenis_informasi_id')
-                //     ->label('Jenis Informasi')
-                //     ->options(function () {
-                //         return JenisInformasi::pluck('jenis_informasi', 'id')->toArray();
-                //     })
-                //     ->searchable()
-                //     ->required(),
-                // Select::make('detail_jenis_informasi_id')
-                //     ->label('Detail Jenis Informasi')
-                //     ->options(function () {
-                //         return DetailJenisInformasi::pluck('description', 'id')->toArray();
-                //     })
-                //     ->searchable()
-                //     ->required(),
+         
                 TextInput::make('description')
                     ->label('Keterangan')
                     ->required(),
@@ -114,12 +92,10 @@ class InfografisResource extends Resource
                     ->label('Nama Dokumen')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('path_dokumen')
+                ImageColumn::make('path_dokumen')
+                    ->getStateUsing(fn(Infografis $record) => asset('storage/' . $record->path_dokumen))
                     ->label('File Infografis')
-                    ->getStateUsing(function (Infografis $record) {
-                        return $record->path_dokumen ? asset('storage/' . $record->path_dokumen) : null;
-                    })
-                    ->sortable(),
+                    ->circular(),
                 TextColumn::make('is_active')
                     ->getStateUsing(fn(Infografis $record) => $record->is_active ? 'Aktif' : 'Tidak Aktif')
                     ->color(fn(Infografis $record) => $record->is_active ? 'success' : 'danger')

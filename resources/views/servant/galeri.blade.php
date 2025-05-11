@@ -11,8 +11,9 @@
     </div>
     <hr class="border-t-2 border-gray-400 w-full my-4">
 
-    <div class="flex justify-center items-center min-h-screen ">
-        <div class="p-6 rounded-md w-[600px]">
+<div class="flex justify-center p-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[1200px] w-full">
+        <div class="card w-full bg-white p-6 shadow-md border-l-4 border-red-500 rounded-md flex flex-col items-center space-y-4 md:space-y-6 md:space-x-0 justify-center">
             @if (Auth::user()->role == 'admin')
             <h1 class="text-xl font-bold text-center w-full mb-6">
                 ADMIN PPID Pembantu : Infografis Dinas Komunikasi dan Informatika
@@ -88,7 +89,9 @@
                 </div>
             @endif
         </div>
+        @include('components.panduan')
     </div>
+</div>
     <hr class="border-t-2 border-gray-400 w-full my-4">
     <div class="max-w-screen-xl mx-auto relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
@@ -107,7 +110,7 @@
                         Status
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Path Dokumen
+                        Gambar
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Tanggal Upload
@@ -137,7 +140,7 @@
                             <td class="px-6 py-4 truncate">{{ $item->title }}</td>
                             <td class="px-6 py-4 truncate">{{ $item->description }}</td>
                             <td class="px-6 py-4 truncate"> {{ $item->is_active ? 'Aktif' : 'Tidak Aktif' }}</td>
-                            <td class="px-6 py-4 truncate">{{ $item->path_img }}</td>
+                            <td class="px-6 py-4 truncate"><img class="w-20 h-20" src="{{ asset('storage/' . $item->path_img) }}" alt="{{ $item->title }}"></td>
                             <td class="px-6 py-4">
                                 {{ \Carbon\Carbon::parse($item->created_at)->locale('id')->isoFormat('D MMMM YYYY') }}</td>
                             {{-- <td class="px-6 py-4 truncate">{{ $item->path_dokumen }}</td> --}}

@@ -7,13 +7,6 @@
         <div class="flex justify-center mt-1">
             <img src="{{ asset('logo/stukturalppid.jpg') }}" alt="dummyimage" class="my-2" />
         </div>
-        <p
-            class="border shadow-teal-300 shadow-md max-w-2xl p-6 rounded-lg hover:border-3 hover:text-white hover:bg-red-600">
-            Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for
-            previewing layouts and visual mockups....
-
-        </p>
-
     </div>
 </div>
 @endsection

@@ -36,13 +36,13 @@ class AuthController extends Controller
         if($user->role == 'admin'){
             $credentials = $request->only('name', 'password');
             if (Auth::attempt($credentials)) {
-                
+
                 $request->session()->regenerate();
                 Alert::success('Success', 'Login Berhasil');
                 return redirect('/admin');
             }
         }
-        
+
         $credentials = $request->only('name', 'password');
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
@@ -84,20 +84,22 @@ class AuthController extends Controller
             $data['password'] = bcrypt('password');
             $data['role'] = 'pembantu';
             $data['is_active'] = false;
-            $request->file('file_pdf')->store('surat_tugas', 'private'); 
+            $request->file('file_pdf')->store('surat_tugas', 'private');
             $data['path_surat_tugas'] = $request->file('file_pdf')->hashName();
             User::create($data);
             DB::commit();
 
             Alert::success('Success', 'Register Berhasil, Hubungi admin untuk aktivasi akun');
             return redirect()->back();
-        }   
+        }
         catch(\Exception $e){
             DB::rollback();
             Alert::error('Error', 'Register Gagal, Silahkan coba lagi');
             return redirect()->back();
         }
     }
+
+
 
     public function logout()
     {
